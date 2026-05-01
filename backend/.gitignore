@@ -1,0 +1,47 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Virtual Environment
+venv/
+.venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Environment
+.env
+
+# Database
+data/*.sqlite
+
+# Logs
+logs/*.json
+logs/*.log
+
+# Reports (keep directory but ignore generated files)
+reports/*.md
+reports/*.txt
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Coverage
+htmlcov/
+.coverage
+coverage.xml
+
+# Frontend
+frontend/node_modules/
+frontend/dist/

@@ -1,0 +1,32 @@
+[
+  {
+    "id": "query_1",
+    "query": "Analyze AAPL, MSFT, GOOGL for a moderate-risk portfolio",
+    "description": "Standard multi-ticker analysis for balanced investor",
+    "expected_tickers": ["AAPL", "MSFT", "GOOGL"]
+  },
+  {
+    "id": "query_2",
+    "query": "Research Tesla and Amazon stock performance and risk",
+    "description": "Two-ticker analysis with company names instead of symbols",
+    "expected_tickers": ["TSLA", "AMZN"]
+  },
+  {
+    "id": "query_3",
+    "query": "Evaluate NVDA and AMD for tech sector investment potential",
+    "description": "Sector-focused analysis of semiconductor stocks",
+    "expected_tickers": ["NVDA", "AMD"]
+  },
+  {
+    "id": "query_4",
+    "query": "Give me a risk analysis of META, NFLX, and DIS for a growth portfolio",
+    "description": "Media/entertainment sector with growth focus",
+    "expected_tickers": ["META", "NFLX", "DIS"]
+  },
+  {
+    "id": "query_5",
+    "query": "Analyze Apple stock for long-term investment",
+    "description": "Single-ticker deep analysis",
+    "expected_tickers": ["AAPL"]
+  }
+]
