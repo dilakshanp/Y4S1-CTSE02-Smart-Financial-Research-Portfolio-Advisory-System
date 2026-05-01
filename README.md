@@ -95,7 +95,7 @@ The report is saved as a `.md` file in the `reports/` folder and displayed in th
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│  🌐 React Frontend (Vite)  —  http://localhost:5173            │
+│  🌐 React Frontend (Vite)  —  http://localhost:5173             │
 │  ├── Query Input + Sample Chips                                 │
 │  ├── Animated 4-Step Agent Pipeline Visualization               │
 │  ├── Market Data / Sentiment / Risk Summary Cards               │
@@ -115,20 +115,20 @@ The report is saved as a `.md` file in the `reports/` folder and displayed in th
                        │
 ┌──────────────────────▼──────────────────────────────────────────┐
 │  🤖 CrewAI Multi-Agent Pipeline                                 │
-│  ┌───────────┐  ┌──────────────┐  ┌──────────────┐  ┌────────┐│
-│  │Coordinator│→ │Market Analyst│→ │Risk Specialist│→ │Advisor ││
-│  │ 🔧yfinance│  │🔧 VADER+RSS │  │🔧 NumPy/Pandas│  │🔧Report││
-│  └───────────┘  └──────────────┘  └──────────────┘  └────────┘│
+│  ┌───────────┐  ┌──────────────┐  ┌──────────────┐  ┌────────┐  │
+│  │Coordinator│→ │Market Analyst│→ │Risk Specialist│→│Advisor │  │
+│  │ 🔧yfinance│  │🔧 VADER+RSS   │  │🔧 NumPy/Pandas│ │🔧Report│  │
+│  └───────────┘  └──────────────┘  └──────────────┘  └────────┘  │
 │                        ↕                                        │
-│  ┌──────────────────────────────────────────────────────────┐  │
-│  │  Pydantic State │ SQLite DB │ JSON Logger │ Callbacks    │  │
-│  └──────────────────────────────────────────────────────────┘  │
+│  ┌──────────────────────────────────────────────────────────┐   │
+│  │  Pydantic State │ SQLite DB │ JSON Logger │ Callbacks    │   │
+│  └──────────────────────────────────────────────────────────┘   │
 └─────────────────────────────────────────────────────────────────┘
                        │
               ┌────────▼────────┐
               │  🧠 Ollama LLM  │
-              │  llama3:8b       │
-              │  (runs locally)  │
+              │  llama3:8b      │
+              │  (runs locally) │
               └─────────────────┘
 ```
 
