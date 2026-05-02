@@ -178,13 +178,13 @@ def create_advisory_report_task(agent: Agent) -> Task:
             "1. Review all available data from previous agents.\n"
             "2. Formulate investment recommendations based on the data.\n"
             "3. Use the 'Report Generator' tool to create the final report.\n"
-            "4. The tool expects a JSON string as 'report_data' with these keys:\n"
-            '   - "tickers": list of ticker symbols\n'
-            '   - "market_data": "Write a concise summary of the market data"\n'
-            '   - "sentiment": "Write a concise summary of the sentiment analysis"\n'
-            '   - "risk_metrics": risk analysis from the Risk Specialist\n'
-            '   - "recommendations": your investment recommendations\n'
-            "5. Set report_format to 'markdown'.\n\n"
+            "4. Your Action Input for the tool MUST be a valid JSON object containing exactly these keys:\n"
+            '   - "tickers": list of ticker symbols (e.g. ["AAPL", "MSFT"])\n'
+            '   - "market_data_summary": "Concise 1-paragraph summary of market data"\n'
+            '   - "sentiment_summary": "Concise 1-paragraph summary of sentiment data"\n'
+            '   - "risk_metrics_summary": "Concise 1-paragraph summary of risk metrics"\n'
+            '   - "recommendations": "Your final investment recommendations"\n'
+            '   - "report_format": "markdown"\n\n'
             "CONSTRAINTS:\n"
             "- You MUST use the Report Generator tool to create the report.\n"
             "- Ensure your tool input is VALID JSON format (use double quotes for keys/strings).\n"
