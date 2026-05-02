@@ -121,74 +121,73 @@ class NewsSentimentAnalyzerTool(BaseTool):
                     "message": "Search query cannot be empty."
                 })
 
+            # Handle multiple tickers
+            tickers = [t.strip() for t in query_clean.split(",") if t.strip()]
+            all_results = []
+            
             # Initialize VADER sentiment analyzer
             analyzer: SentimentIntensityAnalyzer = SentimentIntensityAnalyzer()
             
-            # Fetch news articles from multiple RSS sources
-            articles: List[Dict[str, Any]] = self._fetch_news(query_clean, max_articles)
-            
-            if not articles:
-                return json.dumps({
-                    "error": False,
-                    "query": query_clean,
-                    "articles_analyzed": 0,
-                    "average_sentiment": 0.0,
-                    "sentiment_label": "NEUTRAL",
-                    "message": f"No recent news articles found for '{query_clean}'.",
-                    "articles": [],
-                    "top_headlines": [],
-                    "analyzed_at": datetime.now().isoformat()
+            for ticker in tickers:
+                # Fetch news articles from multiple RSS sources
+                articles: List[Dict[str, Any]] = self._fetch_news(ticker, max_articles)
+                
+                if not articles:
+                    all_results.append({
+                        "query": ticker,
+                        "articles_analyzed": 0,
+                        "average_sentiment": 0.0,
+                        "sentiment_label": "NEUTRAL",
+                        "articles": [],
+                        "top_headlines": []
+                    })
+                    continue
+
+                # Analyze sentiment for each article
+                analyzed_articles: List[Dict[str, Any]] = []
+                sentiment_scores: List[float] = []
+                
+                for article in articles:
+                    # Combine title and summary for sentiment analysis
+                    text: str = f"{article.get('title', '')}. {article.get('summary', '')}"
+                    text_clean: str = self._clean_text(text)
+                    
+                    # Get VADER sentiment scores
+                    scores: Dict[str, float] = analyzer.polarity_scores(text_clean)
+                    compound_score: float = scores["compound"]
+                    sentiment_scores.append(compound_score)
+                    
+                    analyzed_articles.append({
+                        "title": article.get("title", "N/A"),
+                        "source": article.get("source", "N/A"),
+                        "published": article.get("published", "N/A"),
+                        "link": article.get("link", ""),
+                        "sentiment_score": round(compound_score, 4),
+                        "sentiment_label": self._classify_sentiment(compound_score),
+                    })
+
+                # Calculate aggregate sentiment
+                avg_sentiment: float = (
+                    sum(sentiment_scores) / len(sentiment_scores)
+                    if sentiment_scores else 0.0
+                )
+                
+                all_results.append({
+                    "query": ticker,
+                    "articles_analyzed": len(analyzed_articles),
+                    "average_sentiment": round(avg_sentiment, 4),
+                    "sentiment_label": self._classify_sentiment(avg_sentiment),
+                    "top_headlines": [a["title"] for a in analyzed_articles[:5]],
                 })
 
-            # Analyze sentiment for each article
-            analyzed_articles: List[Dict[str, Any]] = []
-            sentiment_scores: List[float] = []
+            # Calculate overall sentiment across all tickers
+            total_avg = sum(r["average_sentiment"] for r in all_results) / len(all_results) if all_results else 0.0
             
-            for article in articles:
-                # Combine title and summary for sentiment analysis
-                text: str = f"{article.get('title', '')}. {article.get('summary', '')}"
-                text_clean: str = self._clean_text(text)
-                
-                # Get VADER sentiment scores
-                scores: Dict[str, float] = analyzer.polarity_scores(text_clean)
-                compound_score: float = scores["compound"]
-                sentiment_scores.append(compound_score)
-                
-                analyzed_articles.append({
-                    "title": article.get("title", "N/A"),
-                    "source": article.get("source", "N/A"),
-                    "published": article.get("published", "N/A"),
-                    "link": article.get("link", ""),
-                    "sentiment_score": round(compound_score, 4),
-                    "sentiment_label": self._classify_sentiment(compound_score),
-                    "sentiment_details": {
-                        "positive": round(scores["pos"], 4),
-                        "negative": round(scores["neg"], 4),
-                        "neutral": round(scores["neu"], 4),
-                        "compound": round(scores["compound"], 4),
-                    }
-                })
-
-            # Calculate aggregate sentiment
-            avg_sentiment: float = (
-                sum(sentiment_scores) / len(sentiment_scores)
-                if sentiment_scores else 0.0
-            )
-            
-            # Build result
+            # Build final combined result
             result: Dict[str, Any] = {
                 "error": False,
-                "query": query_clean,
-                "articles_analyzed": len(analyzed_articles),
-                "average_sentiment": round(avg_sentiment, 4),
-                "sentiment_label": self._classify_sentiment(avg_sentiment),
-                "sentiment_distribution": {
-                    "bullish": sum(1 for s in sentiment_scores if s > 0.05),
-                    "neutral": sum(1 for s in sentiment_scores if -0.05 <= s <= 0.05),
-                    "bearish": sum(1 for s in sentiment_scores if s < -0.05),
-                },
-                "articles": analyzed_articles,
-                "top_headlines": [a["title"] for a in analyzed_articles[:5]],
+                "sentiment_results": all_results,
+                "overall_sentiment": self._classify_sentiment(total_avg),
                 "analyzed_at": datetime.now().isoformat(),
             }
 
