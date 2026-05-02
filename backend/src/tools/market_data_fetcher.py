@@ -201,8 +201,6 @@ class MarketDataFetcherTool(BaseTool):
                 ),
                 "sector": info.get("sector", "N/A"),
                 "industry": info.get("industry", "N/A"),
-                "historical_prices": historical_prices,
-                "data_points": len(historical_prices),
                 "period": period,
                 "currency": info.get("currency", "USD"),
                 "fetched_at": datetime.now().isoformat(),

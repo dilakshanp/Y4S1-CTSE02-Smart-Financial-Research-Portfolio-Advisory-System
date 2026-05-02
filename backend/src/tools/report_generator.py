@@ -126,7 +126,11 @@ class ReportGeneratorTool(BaseTool):
             market_data: Any = data.get("market_data", {})
             sentiment: Any = data.get("sentiment", {})
             risk_metrics: Any = data.get("risk_metrics", {})
-            recommendations: Any = data.get("recommendations", "")
+            
+            if "raw_context" in data:
+                recommendations: Any = data["raw_context"]
+            else:
+                recommendations: Any = data.get("recommendations", "")
 
             # Generate report content
             if report_format == "text":
