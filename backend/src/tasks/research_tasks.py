@@ -180,8 +180,8 @@ def create_advisory_report_task(agent: Agent) -> Task:
             "3. Use the 'Report Generator' tool to create the final report.\n"
             "4. The tool expects a JSON string as 'report_data' with these keys:\n"
             '   - "tickers": list of ticker symbols\n'
-            '   - "market_data": market data from the Coordinator\n'
-            '   - "sentiment": sentiment results from the Market Analyst\n'
+            '   - "market_data": "Write a concise summary of the market data"\n'
+            '   - "sentiment": "Write a concise summary of the sentiment analysis"\n'
             '   - "risk_metrics": risk analysis from the Risk Specialist\n'
             '   - "recommendations": your investment recommendations\n'
             "5. Set report_format to 'markdown'.\n\n"
