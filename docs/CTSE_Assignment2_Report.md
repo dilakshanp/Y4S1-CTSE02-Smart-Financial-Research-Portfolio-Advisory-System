@@ -26,18 +26,18 @@ We use **CrewAI** to orchestrate 4 agents in a `Process.sequential` pipeline. Ea
 User Query
     │
     ▼
-┌───────────────┐     ┌──────────────────┐     ┌──────────────────┐     ┌─────────────────┐
-│  Coordinator  │────▶│  Market Analyst   │────▶│ Risk Specialist  │────▶│ Portfolio Advisor│
-│  🔧 yfinance  │     │ 🔧 VADER + RSS   │     │ 🔧 NumPy/Pandas  │     │ 🔧 Report Gen    │
-└───────┬───────┘     └────────┬─────────┘     └────────┬─────────┘     └────────┬────────┘
+┌───────────────┐     ┌──────────────────┐     ┌──────────────────┐     ┌─────────────────-┐
+│  Coordinator  │────▶│  Market Analyst  │────▶│ Risk Specialist  │────▶│ Portfolio Advisor│
+│   yfinance    │     │  VADER + RSS     │     │  NumPy/Pandas    │     │  Report Gen      │
+└───────┬───────┘     └────────┬─────────┘     └────────┬─────────┘     └────────┬───────-─┘
         ▼                      ▼                        ▼                        ▼
    Market Data          Sentiment Scores          Risk Metrics          Advisory Report
         │                      │                        │                        │
         └──────────────────────┴────────────────────────┴────────────────────────┘
                                         ▼
-              ┌──────────────────────────────────────────┐
+              ┌─────────────────────────────────────────-─┐
               │ Pydantic State │ SQLite DB │ JSON Logger  │
-              └──────────────────────────────────────────┘
+              └─────────────────────────────────────────-─┘
 ```
 
 A **React (Vite) frontend** communicates with a **Flask REST API** (`src/api.py`) that runs the pipeline in a background thread and streams agent activity to the browser via **Server-Sent Events (SSE)**.

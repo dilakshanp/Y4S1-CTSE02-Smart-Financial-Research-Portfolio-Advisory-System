@@ -40,24 +40,33 @@ class ReportGeneratorInput(BaseModel):
     Defines and validates the parameters required to generate
     a financial advisory report.
     """
-    report_data: str = Field(
-        ...,
-        description=(
-            "JSON string containing the report data. Expected keys: "
-            "'tickers' (list of symbols), 'market_data' (market metrics), "
-            "'sentiment' (sentiment analysis results), 'risk_metrics' (risk data), "
-            "'recommendations' (advisory recommendations). "
-            "The tool will synthesize all provided data into a formatted report."
-        )
+    tickers: Optional[Any] = Field(
+        default=None,
+        description="List of stock ticker symbols covered in the report."
     )
-    report_format: str = Field(
+    market_data_summary: Optional[Any] = Field(
+        default=None,
+        description="A concise text summary of the market data."
+    )
+    sentiment_summary: Optional[Any] = Field(
+        default=None,
+        description="A concise text summary of the sentiment analysis."
+    )
+    risk_metrics_summary: Optional[Any] = Field(
+        default=None,
+        description="The full risk analysis data or summary."
+    )
+    recommendations: Optional[Any] = Field(
+        default=None,
+        description="Your actionable investment recommendations."
+    )
+    report_format: Optional[str] = Field(
         default="markdown",
-        description=(
-            "Output format for the report. Options: 'markdown' (default) or 'text'. "
-            "Markdown provides rich formatting with headers, tables, and emphasis."
-        )
+        description="Output format for the report."
     )
-
+    
+    class Config:
+        extra = "allow"  # Allow any other keys the LLM might hallucinate
 
 class ReportGeneratorTool(BaseTool):
     """
@@ -93,53 +102,76 @@ class ReportGeneratorTool(BaseTool):
     args_schema: Type[BaseModel] = ReportGeneratorInput
 
     def _run(
-        self, report_data: str, report_format: str = "markdown"
+        self,
+        tickers: Optional[Any] = None,
+        market_data_summary: Optional[Any] = None,
+        sentiment_summary: Optional[Any] = None,
+        risk_metrics_summary: Optional[Any] = None,
+        recommendations: Optional[Any] = None,
+        report_format: str = "markdown",
+        **kwargs
     ) -> str:
         """
         Execute the report generation operation.
         
-        Parses the input JSON data and generates a comprehensive
-        advisory report, saving it to the reports directory.
-        
         Args:
-            report_data: JSON string with market_data, sentiment, risk_metrics.
+            tickers: List of stock ticker symbols covered.
+            market_data_summary: Market data summary.
+            sentiment_summary: Sentiment analysis results.
+            risk_metrics_summary: Risk metric calculations.
+            recommendations: Advisory recommendations.
             report_format: Output format ('markdown' or 'text').
+            **kwargs: Any hallucinated keys from the LLM.
             
         Returns:
-            JSON string containing:
-                - report_content: The full report text
-                - report_path: File path where the report was saved
-                - generated_at: Timestamp of report generation
-                
-            Returns an error message string if generation fails.
+            JSON string containing report generation status, content,
+            and file path.
         """
         try:
-            # Parse input data
-            try:
-                data: Dict[str, Any] = json.loads(report_data)
-            except json.JSONDecodeError:
-                # If not valid JSON, treat as plain text context
-                data = {"raw_context": report_data}
+            # Fallback: If LangChain passes the entire Action Input as a single raw string
+            # to the first argument (`tickers`) because of markdown backticks, we parse it manually.
+            if isinstance(tickers, str) and ("{" in tickers and "}" in tickers):
+                try:
+                    import json
+                    import re
+                    # Strip markdown blocks
+                    clean_str = re.sub(r"```(json)?", "", tickers).strip()
+                    parsed_data = json.loads(clean_str)
+                    
+                    # Override the empty kwargs with the parsed JSON
+                    if isinstance(parsed_data, dict):
+                        tickers = parsed_data.get("tickers", [])
+                        market_data_summary = market_data_summary or parsed_data.get("market_data_summary") or parsed_data.get("market_data")
+                        sentiment_summary = sentiment_summary or parsed_data.get("sentiment_summary") or parsed_data.get("sentiment_analysis") or parsed_data.get("sentiment")
+                        risk_metrics_summary = risk_metrics_summary or parsed_data.get("risk_metrics_summary") or parsed_data.get("risk_metrics")
+                        recommendations = recommendations or parsed_data.get("recommendations")
+                except Exception:
+                    pass
 
-            # Extract components with safe defaults
-            tickers: list = data.get("tickers", [])
-            market_data: Any = data.get("market_data", {})
-            sentiment: Any = data.get("sentiment", {})
-            risk_metrics: Any = data.get("risk_metrics", {})
-            
-            if "raw_context" in data:
-                recommendations: Any = data["raw_context"]
-            else:
-                recommendations: Any = data.get("recommendations", "")
+            # Re-map legacy keys if the LLM hallucinated them into kwargs
+            if kwargs:
+                if not market_data_summary and "market_data" in kwargs:
+                    market_data_summary = kwargs["market_data"]
+                if not sentiment_summary and "sentiment_analysis" in kwargs:
+                    sentiment_summary = kwargs["sentiment_analysis"]
+                if not sentiment_summary and "sentiment" in kwargs:
+                    sentiment_summary = kwargs["sentiment"]
+                if not risk_metrics_summary and "risk_metrics" in kwargs:
+                    risk_metrics_summary = kwargs["risk_metrics"]
 
+            # Format tickers safely
+            if isinstance(tickers, str):
+                tickers = [t.strip() for t in tickers.split(",") if t.strip()]
+            elif not isinstance(tickers, list):
+                tickers = []
             # Generate report content
             if report_format == "text":
                 report_content: str = self._generate_text_report(
-                    tickers, market_data, sentiment, risk_metrics, recommendations
+                    tickers, market_data_summary, sentiment_summary, risk_metrics_summary, recommendations
                 )
             else:
                 report_content = self._generate_markdown_report(
-                    tickers, market_data, sentiment, risk_metrics, recommendations
+                    tickers, market_data_summary, sentiment_summary, risk_metrics_summary, recommendations
                 )
 
             # Save report to file
