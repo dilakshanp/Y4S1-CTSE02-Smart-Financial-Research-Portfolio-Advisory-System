@@ -3,30 +3,721 @@
     "id": "query_1",
     "query": "Analyze AAPL, MSFT, GOOGL for a moderate-risk portfolio",
     "description": "Standard multi-ticker analysis for balanced investor",
-    "expected_tickers": ["AAPL", "MSFT", "GOOGL"]
+    "expected_tickers": [
+      "AAPL",
+      "MSFT",
+      "GOOGL"
+    ]
   },
   {
     "id": "query_2",
     "query": "Research Tesla and Amazon stock performance and risk",
     "description": "Two-ticker analysis with company names instead of symbols",
-    "expected_tickers": ["TSLA", "AMZN"]
+    "expected_tickers": [
+      "TSLA",
+      "AMZN"
+    ]
   },
   {
     "id": "query_3",
     "query": "Evaluate NVDA and AMD for tech sector investment potential",
     "description": "Sector-focused analysis of semiconductor stocks",
-    "expected_tickers": ["NVDA", "AMD"]
+    "expected_tickers": [
+      "NVDA",
+      "AMD"
+    ]
   },
   {
     "id": "query_4",
     "query": "Give me a risk analysis of META, NFLX, and DIS for a growth portfolio",
     "description": "Media/entertainment sector with growth focus",
-    "expected_tickers": ["META", "NFLX", "DIS"]
+    "expected_tickers": [
+      "META",
+      "NFLX",
+      "DIS"
+    ]
   },
   {
     "id": "query_5",
     "query": "Analyze Apple stock for long-term investment",
     "description": "Single-ticker deep analysis",
-    "expected_tickers": ["AAPL"]
+    "expected_tickers": [
+      "AAPL"
+    ]
+  },
+  {
+    "id": "query_6",
+    "query": "Analyze JPM, BAC, and WFC for a conservative banking portfolio",
+    "description": "Banking sector analysis for low-risk investors",
+    "expected_tickers": [
+      "JPM",
+      "BAC",
+      "WFC"
+    ]
+  },
+  {
+    "id": "query_7",
+    "query": "Compare Coca-Cola and Pepsi stock performance and dividends",
+    "description": "Consumer goods comparison with dividend focus",
+    "expected_tickers": [
+      "KO",
+      "PEP"
+    ]
+  },
+  {
+    "id": "query_8",
+    "query": "Evaluate Intel, Qualcomm, and Broadcom for semiconductor investments",
+    "description": "Chipmakers comparison for tech investors",
+    "expected_tickers": [
+      "INTC",
+      "QCOM",
+      "AVGO"
+    ]
+  },
+  {
+    "id": "query_9",
+    "query": "Research Uber and Lyft growth potential and risks",
+    "description": "Ride-sharing companies growth analysis",
+    "expected_tickers": [
+      "UBER",
+      "LYFT"
+    ]
+  },
+  {
+    "id": "query_10",
+    "query": "Analyze gold and silver mining stocks like NEM and GOLD",
+    "description": "Commodity-based stock analysis",
+    "expected_tickers": [
+      "NEM",
+      "GOLD"
+    ]
+  },
+  {
+    "id": "query_11",
+    "query": "Evaluate energy stocks XOM, CVX, and BP for dividend income",
+    "description": "Oil and gas sector with income focus",
+    "expected_tickers": [
+      "XOM",
+      "CVX",
+      "BP"
+    ]
+  },
+  {
+    "id": "query_12",
+    "query": "Compare Shopify and Square for e-commerce and fintech growth",
+    "description": "High-growth tech companies comparison",
+    "expected_tickers": [
+      "SHOP",
+      "SQ"
+    ]
+  },
+  {
+    "id": "query_13",
+    "query": "Analyze Pfizer and Moderna for pharmaceutical investment opportunities",
+    "description": "Healthcare sector and vaccine companies",
+    "expected_tickers": [
+      "PFE",
+      "MRNA"
+    ]
+  },
+  {
+    "id": "query_14",
+    "query": "Evaluate Disney and Warner Bros Discovery for media sector performance",
+    "description": "Entertainment industry comparison",
+    "expected_tickers": [
+      "DIS",
+      "WBD"
+    ]
+  },
+  {
+    "id": "query_15",
+    "query": "Analyze Airbnb stock for long-term growth potential",
+    "description": "Single company growth analysis",
+    "expected_tickers": [
+      "ABNB"
+    ]
+  },
+  {
+    "id": "query_16",
+    "query": "Analyze V, MA, and PYPL for digital payments investment strategy",
+    "description": "Fintech and payments sector comparison",
+    "expected_tickers": [
+      "V",
+      "MA",
+      "PYPL"
+    ]
+  },
+  {
+    "id": "query_17",
+    "query": "Compare Boeing and Airbus stock performance and risk factors",
+    "description": "Aerospace industry comparison",
+    "expected_tickers": [
+      "BA",
+      "EADSY"
+    ]
+  },
+  {
+    "id": "query_18",
+    "query": "Evaluate Walmart, Costco, and Target for retail sector stability",
+    "description": "Retail giants comparison for stable investment",
+    "expected_tickers": [
+      "WMT",
+      "COST",
+      "TGT"
+    ]
+  },
+  {
+    "id": "query_19",
+    "query": "Research Zoom and Slack growth potential in the collaboration software market",
+    "description": "Remote work software analysis",
+    "expected_tickers": [
+      "ZM",
+      "WORK"
+    ]
+  },
+  {
+    "id": "query_20",
+    "query": "Analyze renewable energy stocks ENPH, FSLR, and SEDG",
+    "description": "Clean energy sector investment opportunities",
+    "expected_tickers": [
+      "ENPH",
+      "FSLR",
+      "SEDG"
+    ]
+  },
+  {
+    "id": "query_21",
+    "query": "Evaluate McDonald's and Starbucks for long-term consumer brand investment",
+    "description": "Food and beverage industry comparison",
+    "expected_tickers": [
+      "MCD",
+      "SBUX"
+    ]
+  },
+  {
+    "id": "query_22",
+    "query": "Compare Adobe, Salesforce, and Oracle for enterprise software investments",
+    "description": "Enterprise SaaS sector analysis",
+    "expected_tickers": [
+      "ADBE",
+      "CRM",
+      "ORCL"
+    ]
+  },
+  {
+    "id": "query_23",
+    "query": "Analyze transportation stocks FedEx, UPS, and DHL",
+    "description": "Logistics and delivery sector comparison",
+    "expected_tickers": [
+      "FDX",
+      "UPS",
+      "DHLGY"
+    ]
+  },
+  {
+    "id": "query_24",
+    "query": "Evaluate biotech stocks Gilead, Amgen, and Biogen",
+    "description": "Biotechnology sector investment analysis",
+    "expected_tickers": [
+      "GILD",
+      "AMGN",
+      "BIIB"
+    ]
+  },
+  {
+    "id": "query_25",
+    "query": "Analyze Netflix stock for long-term growth and competition risks",
+    "description": "Single stock deep dive in streaming industry",
+    "expected_tickers": [
+      "NFLX"
+    ]
+  },
+  {
+    "id": "query_26",
+    "query": "Analyze TSM, ASML, and AMAT for semiconductor supply chain exposure",
+    "description": "Chip manufacturing and equipment ecosystem analysis",
+    "expected_tickers": [
+      "TSM",
+      "ASML",
+      "AMAT"
+    ]
+  },
+  {
+    "id": "query_27",
+    "query": "Compare ExxonMobil and Shell stock outlook and dividend safety",
+    "description": "Oil majors comparison with income focus",
+    "expected_tickers": [
+      "XOM",
+      "SHEL"
+    ]
+  },
+  {
+    "id": "query_28",
+    "query": "Evaluate BRK.B and BLK for asset management investment potential",
+    "description": "Investment firms comparison",
+    "expected_tickers": [
+      "BRK.B",
+      "BLK"
+    ]
+  },
+  {
+    "id": "query_29",
+    "query": "Research Snowflake and Datadog growth and valuation risks",
+    "description": "Cloud data and observability companies",
+    "expected_tickers": [
+      "SNOW",
+      "DDOG"
+    ]
+  },
+  {
+    "id": "query_30",
+    "query": "Analyze telecom stocks T, VZ, and TMUS for stability and dividends",
+    "description": "US telecom sector analysis",
+    "expected_tickers": [
+      "T",
+      "VZ",
+      "TMUS"
+    ]
+  },
+  {
+    "id": "query_31",
+    "query": "Compare Nike and Adidas performance and global demand trends",
+    "description": "Athletic apparel industry comparison",
+    "expected_tickers": [
+      "NKE",
+      "ADDYY"
+    ]
+  },
+  {
+    "id": "query_32",
+    "query": "Evaluate Goldman Sachs and Morgan Stanley for banking sector growth",
+    "description": "Investment banking comparison",
+    "expected_tickers": [
+      "GS",
+      "MS"
+    ]
+  },
+  {
+    "id": "query_33",
+    "query": "Analyze CVS and Walgreens for healthcare retail investment",
+    "description": "Pharmacy retail chains comparison",
+    "expected_tickers": [
+      "CVS",
+      "WBA"
+    ]
+  },
+  {
+    "id": "query_34",
+    "query": "Research Roblox and Unity Software for gaming platform growth",
+    "description": "Interactive entertainment and game engine companies",
+    "expected_tickers": [
+      "RBLX",
+      "U"
+    ]
+  },
+  {
+    "id": "query_35",
+    "query": "Evaluate Ford, GM, and Rivian for EV transition potential",
+    "description": "Auto industry shift to electric vehicles",
+    "expected_tickers": [
+      "F",
+      "GM",
+      "RIVN"
+    ]
+  },
+  {
+    "id": "query_36",
+    "query": "Analyze PayPal and Block for fintech competition and margins",
+    "description": "Digital payments and fintech rivalry",
+    "expected_tickers": [
+      "PYPL",
+      "SQ"
+    ]
+  },
+  {
+    "id": "query_37",
+    "query": "Compare AT&T and Comcast for telecom and media exposure",
+    "description": "Telecom and cable media companies",
+    "expected_tickers": [
+      "T",
+      "CMCSA"
+    ]
+  },
+  {
+    "id": "query_38",
+    "query": "Evaluate Deere and Caterpillar for industrial machinery demand",
+    "description": "Heavy equipment manufacturers analysis",
+    "expected_tickers": [
+      "DE",
+      "CAT"
+    ]
+  },
+  {
+    "id": "query_39",
+    "query": "Analyze Chipotle and Yum Brands for fast food growth potential",
+    "description": "Quick service restaurant comparison",
+    "expected_tickers": [
+      "CMG",
+      "YUM"
+    ]
+  },
+  {
+    "id": "query_40",
+    "query": "Research Spotify and Apple Music competitive positioning",
+    "description": "Music streaming industry comparison",
+    "expected_tickers": [
+      "SPOT",
+      "AAPL"
+    ]
+  },
+  {
+    "id": "query_41",
+    "query": "Evaluate Visa and American Express for payment network strength",
+    "description": "Credit card network comparison",
+    "expected_tickers": [
+      "V",
+      "AXP"
+    ]
+  },
+  {
+    "id": "query_42",
+    "query": "Analyze CrowdStrike and Palo Alto Networks for cybersecurity growth",
+    "description": "Cybersecurity leaders comparison",
+    "expected_tickers": [
+      "CRWD",
+      "PANW"
+    ]
+  },
+  {
+    "id": "query_43",
+    "query": "Compare PepsiCo and Nestle for global food and beverage stability",
+    "description": "Consumer staples multinational comparison",
+    "expected_tickers": [
+      "PEP",
+      "NSRGY"
+    ]
+  },
+  {
+    "id": "query_44",
+    "query": "Evaluate Airbnb and Booking Holdings for travel sector recovery",
+    "description": "Online travel platforms analysis",
+    "expected_tickers": [
+      "ABNB",
+      "BKNG"
+    ]
+  },
+  {
+    "id": "query_45",
+    "query": "Analyze Nvidia stock for AI-driven growth and valuation risks",
+    "description": "Single stock deep dive in AI semiconductor leader",
+    "expected_tickers": [
+      "NVDA"
+    ]
+  },
+  {
+    "id": "query_46",
+    "query": "Compare Coca-Cola and PepsiCo for beverage industry stability",
+    "description": "Consumer staples multinational comparison",
+    "expected_tickers": [
+      "KO",
+      "PEP"
+    ]
+  },
+  {
+    "id": "query_47",
+    "query": "Evaluate Pfizer and Moderna for vaccine technology investment",
+    "description": "Biotechnology sector investment analysis",
+    "expected_tickers": [
+      "PFE",
+      "MRNA"
+    ]
+  },
+  {
+    "id": "query_48",
+    "query": "Analyze Shopify and Squarespace for e-commerce growth potential",
+    "description": "E-commerce platform comparison",
+    "expected_tickers": [
+      "SHOP",
+      "SQSP"
+    ]
+  },
+  {
+    "id": "query_49",
+    "query": "Compare Home Depot and Lowe's for home improvement sector trends",
+    "description": "Retail industry comparison",
+    "expected_tickers": [
+      "HD",
+      "LOW"
+    ]
+  },
+  {
+    "id": "query_50",
+    "query": "Evaluate Intel and AMD for semiconductor market competition",
+    "description": "Chip manufacturers comparison",
+    "expected_tickers": [
+      "INTC",
+      "AMD"
+    ]
+  },
+  {
+    "id": "query_51",
+    "query": "Analyze Disney, Netflix, and Warner Bros. Discovery for media industry positioning",
+    "description": "Media and entertainment content providers comparison",
+    "expected_tickers": [
+      "DIS",
+      "NFLX",
+      "WBD"
+    ]
+  },
+  {
+    "id": "query_52",
+    "query": "Compare Eli Lilly and Novo Nordisk for diabetes and obesity treatment market share",
+    "description": "Biopharmaceutical sector leaders in weight loss drugs",
+    "expected_tickers": [
+      "LLY",
+      "NVO"
+    ]
+  },
+  {
+    "id": "query_53",
+    "query": "Evaluate Starbucks and McDonald's for global coffee and fast food chain strategies",
+    "description": "Quick service restaurants with strong brand recognition",
+    "expected_tickers": [
+      "SBUX",
+      "MCD"
+    ]
+  },
+  {
+    "id": "query_54",
+    "query": "Analyze Tesla, BYD, and Volkswagen for electric vehicle market trends",
+    "description": "Global automotive manufacturers in EV transition",
+    "expected_tickers": [
+      "TSLA",
+      "BYDDF",
+      "VWAGY"
+    ]
+  },
+  {
+    "id": "query_55",
+    "query": "Research Palo Alto Networks, Fortinet, and Check Point for cybersecurity growth",
+    "description": "Network security companies comparison",
+    "expected_tickers": [
+      "PANW",
+      "FTNT",
+      "CHKP"
+    ]
+  },
+  {
+    "id": "query_56",
+    "query": "Compare Visa and Mastercard for payment processing market dominance",
+    "description": "Global payment networks with duopolistic structure",
+    "expected_tickers": [
+      "V",
+      "MA"
+    ]
+  },
+  {
+    "id": "query_57",
+    "query": "Evaluate Caterpillar and Deere for industrial equipment demand outlook",
+    "description": "Heavy machinery manufacturers analysis",
+    "expected_tickers": [
+      "CAT",
+      "DE"
+    ]
+  },
+  {
+    "id": "query_58",
+    "query": "Analyze FedEx, UPS, and DHL for global logistics and shipping market",
+    "description": "Delivery and logistics services providers comparison",
+    "expected_tickers": [
+      "FDX",
+      "UPS",
+      "DHLGY"
+    ]
+  },
+  {
+    "id": "query_59",
+    "query": "Compare AMD, Intel, and Nvidia for semiconductor innovation and market position",
+    "description": "Chip technology companies comparison",
+    "expected_tickers": [
+      "AMD",
+      "INTC",
+      "NVDA"
+    ]
+  },
+  {
+    "id": "query_60",
+    "query": "Evaluate Costco, Walmart, and Target for discount retail sector performance",
+    "description": "Big-box retailers comparison",
+    "expected_tickers": [
+      "COST",
+      "WMT",
+      "TGT"
+    ]
+  },
+  {
+    "id": "query_61",
+    "query": "Analyze Booking Holdings and Airbnb for online travel market share",
+    "description": "Travel tech companies comparison",
+    "expected_tickers": [
+      "BKNG",
+      "ABNB"
+    ]
+  },
+  {
+    "id": "query_62",
+    "query": "Compare Microsoft and Oracle for enterprise software and cloud computing strategies",
+    "description": "Business software and cloud providers comparison",
+    "expected_tickers": [
+      "MSFT",
+      "ORCL"
+    ]
+  },
+  {
+    "id": "query_63",
+    "query": "Evaluate Eli Lilly, Pfizer, and Johnson & Johnson for pharmaceutical innovation pipeline",
+    "description": "Major drug manufacturers analysis",
+    "expected_tickers": [
+      "LLY",
+      "PFE",
+      "JNJ"
+    ]
+  },
+  {
+    "id": "query_64",
+    "query": "Analyze Chipotle and Domino's for restaurant industry growth strategies",
+    "description": "Fast-casual and pizza delivery chains comparison",
+    "expected_tickers": [
+      "CMG",
+      "DPZ"
+    ]
+  },
+  {
+    "id": "query_65",
+    "query": "Compare PepsiCo and Coca-Cola for beverage and snack portfolio management",
+    "description": "Global consumer beverage companies comparison",
+    "expected_tickers": [
+      "PEP",
+      "KO"
+    ]
+  },
+  {
+    "id": "query_66",
+    "query": "Evaluate Chevron and ExxonMobil for energy sector investment potential",
+    "description": "Oil and gas supermajors comparison",
+    "expected_tickers": [
+      "CVX",
+      "XOM"
+    ]
+  },
+  {
+    "id": "query_67",
+    "query": "Analyze Shopify and MercadoLibre for e-commerce platform growth",
+    "description": "Online retail technology platforms comparison",
+    "expected_tickers": [
+      "SHOP",
+      "MELI"
+    ]
+  },
+  {
+    "id": "query_68",
+    "query": "Compare PayPal and Square for digital payments and fintech innovation",
+    "description": "Digital payment solutions providers comparison",
+    "expected_tickers": [
+      "PYPL",
+      "SQ"
+    ]
+  },
+  {
+    "id": "query_69",
+    "query": "Evaluate Nvidia, Advanced Micro Devices, and Qualcomm for semiconductor design leadership",
+    "description": "Semiconductor designers focused on AI and high-performance computing",
+    "expected_tickers": [
+      "NVDA",
+      "AMD",
+      "QCOM"
+    ]
+  },
+  {
+    "id": "query_70",
+    "query": "Analyze Broadcom, Marvell Technology, and Synopsys for semiconductor IP and software solutions",
+    "description": "Semiconductor infrastructure and design software companies",
+    "expected_tickers": [
+      "AVGO",
+      "MRVL",
+      "SNPS"
+    ]
+  },
+  {
+    "id": "query_71",
+    "query": "Compare TJX Companies and Ross Stores for discount retail strategy",
+    "description": "Off-price retail sector comparison",
+    "expected_tickers": [
+      "TJX",
+      "ROST"
+    ]
+  },
+  {
+    "id": "query_72",
+    "query": "Evaluate Constellation Energy and NextEra Energy for renewable energy generation",
+    "description": "US-based electric utilities with renewable portfolios",
+    "expected_tickers": [
+      "CEG",
+      "NEE"
+    ]
+  },
+  {
+    "id": "query_73",
+    "query": "Analyze Regeneron Pharmaceuticals and Amgen for biotechnology drug development",
+    "description": "Biotechnology companies with strong drug pipelines",
+    "expected_tickers": [
+      "REGN",
+      "AMGN"
+    ]
+  },
+  {
+    "id": "query_74",
+    "query": "Compare Nike and Adidas for global athletic footwear and apparel market share",
+    "description": "Sportswear industry leaders comparison",
+    "expected_tickers": [
+      "NKE",
+      "ADDYY"
+    ]
+  },
+  {
+    "id": "query_75",
+    "query": "Evaluate Home Depot and Lowe's for home improvement retail sector performance",
+    "description": "DIY and home improvement retailers comparison",
+    "expected_tickers": [
+      "HD",
+      "LOW"
+    ]
+  },
+  {
+    "id": "query_76",
+    "query": "Analyze Zoom Communications and RingCentral for cloud-based communication services",
+    "description": "Unified communications as a service (UCaaS) providers",
+    "expected_tickers": [
+      "ZM",
+      "RNG"
+    ]
+  },
+  {
+    "id": "query_77",
+    "query": "Compare Hilton Worldwide and Marriott International for hotel industry growth",
+    "description": "Global hospitality companies comparison",
+    "expected_tickers": [
+      "HLT",
+      "MAR"
+    ]
+  },
+  {
+    "id": "query_78",
+    "query": "Evaluate Goldman Sachs and Morgan Stanley for investment banking and financial services",
+    "description": "Full-service investment banks comparison",
+    "expected_tickers": [
+      "GS",
+      "MS"
+    ]
   }
 ]
