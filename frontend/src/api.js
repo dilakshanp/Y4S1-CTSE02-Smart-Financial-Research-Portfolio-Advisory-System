@@ -1,3 +1,5 @@
+//Running localhost 5001 for development; update API_BASE for production deployment
+
 const API_BASE = 'http://localhost:5001/api';
 
 export async function submitResearch(query) {
@@ -56,3 +58,6 @@ export async function healthCheck() {
     return { status: 'unreachable' };
   }
 }
+
+
+// Additional API functions can be added here as needed
