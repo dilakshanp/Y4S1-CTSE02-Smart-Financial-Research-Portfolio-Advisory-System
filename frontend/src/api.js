@@ -59,5 +59,3 @@ export async function healthCheck() {
   }
 }
 
-
-// Additional API functions can be added here as needed
